@@ -1,0 +1,2062 @@
+---
+title: "New"
+output: html_document
+---
+
+```{r}
+
+library(simmer)
+library(plyr)
+  
+  
+  Boing=3
+  ceewu=3
+  yisan=2
+  
+  
+  #1-9-6-11
+  route1 <- trajectory("1-9-6-11") %>%
+    batch(yisan,permanent=FALSE,name="1-9")%>%
+    seize("c-130a", amount=1) %>% #bragg to batimore uses c-130
+    timeout(4.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(4.5)%>% #round trip c-130 home
+            release("c-130a",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-6")%>%
+            seize("Boeing 777a",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777a",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="6-11")%>%
+                    seize("c-5a",amount=1)%>%
+                    timeout(15)%>%
+                    release("c-5a",amount=1)%>%
+                    separate()
+          
+          )%>%
+          synchronize(wait = FALSE))
+  
+    
+  
+  
+  #1-9-7-11
+  
+  route2 <- trajectory("1-9-7-11") %>%
+    batch(yisan,permanent=FALSE,name="1-9")%>%
+    seize("c-130a", amount=1) %>% #bragg to batimore uses c-130
+    timeout(4.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(4.5)%>% #round trip c-130 home
+            release("c-130a",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-7")%>%
+            seize("Boeing 777b",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777b",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-11")%>%
+                    seize("c-5b",amount=1)%>%
+                    timeout(16)%>%
+                    release("c-5b",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  #1-9-7-12
+  
+  route3 <- trajectory("1-9-7-12") %>%
+    batch(yisan,permanent=FALSE,name="1-9")%>%
+    seize("c-130a", amount=1) %>% #bragg to batimore uses c-130
+    timeout(4.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(4.5)%>% #round trip c-130 home
+            release("c-130a",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-7")%>%
+            seize("Boeing 777b",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777b",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(16)%>%
+                    release("c-5c",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  #1-9-7-12-13
+  
+  route4<- trajectory("1-9-7-12-13") %>%
+    batch(yisan,permanent=FALSE,name="1-9")%>%
+    seize("c-130a", amount=1) %>% #bragg to batimore uses c-130
+    timeout(4.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(4.5)%>% #round trip c-130 home
+            release("c-130a",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-7")%>%
+            seize("Boeing 777b",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777b",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-13")%>%
+                            seize("c-130b",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130b",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  #1-9-7-12-14
+  
+  route5<- trajectory("1-9-7-12-14") %>%
+    batch(yisan,permanent=FALSE,name="1-9")%>%
+    seize("c-130a", amount=1) %>% #bragg to batimore uses c-130
+    timeout(4.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(4.5)%>% #round trip c-130 home
+            release("c-130a",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-7")%>%
+            seize("Boeing 777b",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777b",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-14")%>%
+                            seize("c-130c",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130c",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  #2-9-6-11
+  
+  
+  route6 <- trajectory("2-9-6-11") %>%
+    batch(yisan,permanent=FALSE,name="2-9")%>%
+    seize("c-130d", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-130d",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-6")%>%
+            seize("Boeing 777a",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777a",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="6-11")%>%
+                    seize("c-5a",amount=1)%>%
+                    timeout(15)%>%
+                    release("c-5a",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  
+  
+  #2-9-7-11
+  
+  route7 <- trajectory("2-9-7-11") %>%
+    batch(yisan,permanent=FALSE,name="2-9")%>%
+    seize("c-130d", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-130d",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-7")%>%
+            seize("Boeing 777b",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777b",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-11")%>%
+                    seize("c-5b",amount=1)%>%
+                    timeout(16)%>%
+                    release("c-5b",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  
+  #2-9-7-12
+  
+  
+  route8 <- trajectory("2-9-7-12") %>%
+    batch(yisan,permanent=FALSE,name="2-9")%>%
+    seize("c-130d", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-130d",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-7")%>%
+            seize("Boeing 777b",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777b",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(16)%>%
+                    release("c-5c",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  #2-9-7-12-13
+  
+  route9<- trajectory("2-9-7-12-13") %>%
+    batch(yisan,permanent=FALSE,name="2-9")%>%
+    seize("c-130d", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-130d",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-7")%>%
+            seize("Boeing 777b",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777b",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-13")%>%
+                            seize("c-130b",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130b",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  #2-9-7-12-14
+  
+  
+  route10<- trajectory("2-9-7-12-14") %>%
+    batch(yisan,permanent=FALSE,name="2-9")%>%
+    seize("c-130d", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-130d",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-7")%>%
+            seize("Boeing 777b",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777b",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-14")%>%
+                            seize("c-130c",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130c",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  
+  
+  #3-9-6-11
+  
+  route11<- trajectory("3-9-6-11") %>%
+    batch(yisan,permanent=FALSE,name="3-9")%>%
+    seize("c-130e", amount=1) %>% #bragg to batimore uses c-130
+    timeout(7)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(7)%>% #round trip c-130 home
+            release("c-130e",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-6")%>%
+            seize("Boeing 777a",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777a",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="6-11")%>%
+                    seize("c-5a",amount=1)%>%
+                    timeout(15)%>%
+                    release("c-5a",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  #3-9-7-11
+  
+  route12<- trajectory("3-9-7-11") %>%
+    batch(yisan,permanent=FALSE,name="3-9")%>%
+    seize("c-130e", amount=1) %>% #bragg to batimore uses c-130
+    timeout(7)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(7)%>% #round trip c-130 home
+            release("c-130e",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-7")%>%
+            seize("Boeing 777b",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777b",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-11")%>%
+                    seize("c-5b",amount=1)%>%
+                    timeout(16)%>%
+                    release("c-5b",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  
+  
+  #3-9-7-12
+  route13<- trajectory("3-9-7-12") %>%
+    batch(yisan,permanent=FALSE,name="3-9")%>%
+    seize("c-130e", amount=1) %>% #bragg to batimore uses c-130
+    timeout(7)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(7)%>% #round trip c-130 home
+            release("c-130e",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-7")%>%
+            seize("Boeing 777b",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777b",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(16)%>%
+                    release("c-5c",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  #3-9-7-12-13
+  
+  route14<- trajectory("3-9-7-12-13") %>%
+    batch(yisan,permanent=FALSE,name="3-9")%>%
+    seize("c-130e", amount=1) %>% #bragg to batimore uses c-130
+    timeout(7)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(7)%>% #round trip c-130 home
+            release("c-130e",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-7")%>%
+            seize("Boeing 777b",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777b",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-13")%>%
+                            seize("c-130b",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130b",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  #3-9-7-12-14
+  
+  
+  route15<- trajectory("3-9-7-12-14") %>%
+    batch(yisan,permanent=FALSE,name="3-9")%>%
+    seize("c-130e", amount=1) %>% #bragg to batimore uses c-130
+    timeout(7)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(7)%>% #round trip c-130 home
+            release("c-130e",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-7")%>%
+            seize("Boeing 777b",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777b",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-14")%>%
+                            seize("c-130c",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130c",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  
+  #6-11
+  route16 <- trajectory("6-11") %>%
+    batch(ceewu,permanent=FALSE,name="6-11")%>%
+    seize("c-5a",amount=1)%>%
+    timeout(15)%>%
+    release("c-5a",amount=1)
+  
+  #6-12
+  route17 <- trajectory("6-12") %>%
+    batch(Boing,permanent=FALSE,name="6-12")%>%
+    seize("Boeing 777c",amount=1)%>%
+    timeout(7.5)%>%
+    release("Boeing 777c",amount=0)%>%
+    timeout(7.5)%>%
+    release("Boeing 777c",amount=1)
+  
+  #6-12-13
+  
+  route18 <- trajectory("6-12-13") %>%
+    batch(Boing,permanent=FALSE,name="6-12")%>%
+    seize("Boeing 777c",amount=1)%>%
+    timeout(7.5)%>%
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(7.5)%>%
+            release("Boeing 777c",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            
+            batch(yisan,permanent=FALSE,name="12-13")%>%
+            seize("c-130b",amount=1)%>%
+            timeout(11)%>%
+            release("c-130b",amount=1)%>%
+            separate()
+    )%>%
+    synchronize(wait = FALSE)
+  
+  #6-12-14
+  
+  route19 <- trajectory("6-12-14") %>%
+    batch(Boing,permanent=FALSE,name="6-12")%>%
+    seize("Boeing 777c",amount=1)%>%
+    timeout(7.5)%>%
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(7.5)%>%
+            release("Boeing 777c",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            
+            batch(yisan,permanent=FALSE,name="12-14")%>%
+            seize("c-130c",amount=1)%>%
+            timeout(11)%>%
+            release("c-130c",amount=1)%>%
+            separate()
+    )%>%
+    synchronize(wait = FALSE)
+  
+  
+  
+  #7-11
+  route20 <- trajectory("7-11") %>%
+    batch(ceewu,permanent=FALSE,name="7-11")%>%
+    seize("c-5b",amount=1)%>%
+    timeout(8)%>%
+    release("c-5b",amount=0)%>%
+    timeout(8)%>%
+    release("c-5b",amount=1)%>%
+    separate()
+  
+  
+  #7-12
+  route21 <- trajectory("7-12") %>%
+    batch(ceewu,permanent=FALSE,name="7-12")%>%
+    seize("c-5c",amount=1)%>%
+    timeout(16)%>%
+    release("c-5c",amount=1)%>%
+    separate()
+  
+  
+  #7-12-13
+  route22 <- trajectory("7-12-13") %>%
+    batch(ceewu,permanent=FALSE,name="7-12")%>%
+    seize("c-5c",amount=1)%>%
+    timeout(8)%>%
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(8)%>%
+            release("c-5c",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            
+            batch(yisan,permanent=FALSE,name="12-13")%>%
+            seize("c-130b",amount=1)%>%
+            timeout(11)%>%
+            release("c-130b",amount=1)%>%
+            separate()
+    )%>%
+    synchronize(wait = FALSE)
+  
+  
+  #7-12-14
+  
+  
+  route23 <- trajectory("7-12-14") %>%
+    batch(ceewu,permanent=FALSE,name="7-12")%>%
+    seize("c-5c",amount=1)%>%
+    timeout(8)%>%
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(8)%>%
+            release("c-5c",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            
+            batch(yisan,permanent=FALSE,name="12-14")%>%
+            seize("c-130c",amount=1)%>%
+            timeout(11)%>%
+            release("c-130c",amount=1)%>%
+            separate()
+    )%>%
+    synchronize(wait = FALSE)
+  
+  
+  #8-11
+  route24<- trajectory("8-11") %>%
+    batch(ceewu,permanent=FALSE,name="8-11")%>%
+    seize("c-5d",amount=1)%>%
+    timeout(9)%>%
+    release("c-5d",amount=0)%>%
+    timeout(9)%>%
+    release("c-5d",amount=1)
+  
+  
+  #8-12
+  route25<- trajectory("8-12") %>%
+    batch(ceewu,permanent=FALSE,name="8-12")%>%
+    seize("c-5e",amount=1)%>%
+    timeout(8)%>%
+    release("c-5e",amount=0)%>%
+    timeout(8)%>%
+    release("c-5e",amount=1)
+  
+  
+  
+  
+  #8-12-13
+  
+  
+  route26 <- trajectory("8-12-13") %>%
+    batch(ceewu,permanent=FALSE,name="8-12")%>%
+    seize("c-5e",amount=1)%>%
+    timeout(8)%>%
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(8)%>%
+            release("c-5e",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            
+            batch(yisan,permanent=FALSE,name="12-13")%>%
+            seize("c-130b",amount=1)%>%
+            timeout(11)%>%
+            release("c-130b",amount=1)%>%
+            separate()
+    )%>%
+    synchronize(wait = FALSE)
+  
+  
+  
+  #8-12-14
+  
+  route27 <- trajectory("8-12-14") %>%
+    batch(ceewu,permanent=FALSE,name="8-12")%>%
+    seize("c-5e",amount=1)%>%
+    timeout(8)%>%
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(8)%>%
+            release("c-5e",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            
+            batch(yisan,permanent=FALSE,name="12-14")%>%
+            seize("c-130c",amount=1)%>%
+            timeout(11)%>%
+            release("c-130c",amount=1)%>%
+            separate()
+    )%>%
+    synchronize(wait = FALSE)
+  
+  #4-10-7-11
+  
+  route28<- trajectory("4-10-7-11") %>%
+    batch(ceewu,permanent=FALSE,name="4-10")%>%
+    seize("c-5f", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-5f",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-7")%>%
+            seize("Boeing 777d",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777d",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-11")%>%
+                    seize("c-5b",amount=1)%>%
+                    timeout(16)%>%
+                    release("c-5b",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  
+  #4-10-7-12
+  
+  
+  route29<- trajectory("4-10-7-12") %>%
+    batch(ceewu,permanent=FALSE,name="4-10")%>%
+    seize("c-5f", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-5f",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-7")%>%
+            seize("Boeing 777d",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777d",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(16)%>%
+                    release("c-5c",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  
+  #4-10-8-12
+  
+  
+  route30<- trajectory("4-10-8-12") %>%
+    batch(ceewu,permanent=FALSE,name="4-10")%>%
+    seize("c-5f", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-5f",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-8")%>%
+            seize("Boeing 777e",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777e",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="8-12")%>%
+                    seize("c-5e",amount=1)%>%
+                    timeout(16)%>%
+                    release("c-5e",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  
+  
+  
+  
+  #4-10-7-12-13
+  
+  route31<- trajectory("4-10-7-12-13") %>%
+    batch(ceewu,permanent=FALSE,name="4-10")%>%
+    seize("c-5f", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-5f",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-7")%>%
+            seize("Boeing 777d",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777d",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-13")%>%
+                            seize("c-130b",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130b",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  
+  #4-10-7-12-14
+  
+  route32<- trajectory("4-10-7-12-14") %>%
+    batch(ceewu,permanent=FALSE,name="4-10")%>%
+    seize("c-5f", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-5f",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-7")%>%
+            seize("Boeing 777d",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777d",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-14")%>%
+                            seize("c-130c",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130c",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  
+  
+  #4-10-8-12-13
+  
+  
+  
+  
+  route33<- trajectory("4-10-8-12-13") %>%
+    batch(ceewu,permanent=FALSE,name="4-10")%>%
+    seize("c-5f", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-5f",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-8")%>%
+            seize("Boeing 777e",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777e",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="8-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-13")%>%
+                            seize("c-130b",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130b",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  #4-10-8-12-14
+  
+  route34<- trajectory("4-10-8-12-14") %>%
+    batch(ceewu,permanent=FALSE,name="4-10")%>%
+    seize("c-5f", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-5f",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-8")%>%
+            seize("Boeing 777e",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777e",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="8-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-14")%>%
+                            seize("c-130c",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130c",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  #4-10-8-11
+  
+  route35<- trajectory("4-10-8-11") %>%
+    batch(ceewu,permanent=FALSE,name="4-10")%>%
+    seize("c-5f", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-5f",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-8")%>%
+            seize("Boeing 777e",amount=1)%>%
+            timeout(8)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8)%>%
+                    release("Boeing 777e",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="8-11")%>%
+                    seize("c-5d",amount=1)%>%
+                    timeout(16)%>%
+                    release("c-5d",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  
+  
+  #1-9-6-12
+  
+  route36<- trajectory("1-9-6-12") %>%
+    batch(yisan,permanent=FALSE,name="1-9")%>%
+    seize("c-130a", amount=1) %>% #bragg to batimore uses c-130
+    timeout(4.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(4.5)%>% #round trip c-130 home
+            release("c-130a",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-6")%>%
+            seize("Boeing 777a",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777a",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(Boing,permanent=FALSE,name="6-12")%>%
+                    seize("Boeing 777c",amount=1)%>%
+                    timeout(15)%>%
+                    release("Boeing 777c",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  #1-9-6-12-13
+  
+  route37<- trajectory("1-9-6-12-13") %>%
+    batch(yisan,permanent=FALSE,name="1-9")%>%
+    seize("c-130a", amount=1) %>% #bragg to batimore uses c-130
+    timeout(4.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(4.5)%>% #round trip c-130 home
+            release("c-130a",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-6")%>%
+            seize("Boeing 777a",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777a",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(Boing,permanent=FALSE,name="6-12")%>%
+                    seize("Boeing 777c",amount=1)%>%
+                    timeout(7.5)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(7.5)%>% 
+                            release("Boeing 777c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-13")%>%
+                            seize("c-130b",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130b",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  #1-9-6-12-14
+  
+  route38<- trajectory("1-9-6-12-14") %>%
+    batch(yisan,permanent=FALSE,name="1-9")%>%
+    seize("c-130a", amount=1) %>% #bragg to batimore uses c-130
+    timeout(4.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(4.5)%>% #round trip c-130 home
+            release("c-130a",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-6")%>%
+            seize("Boeing 777a",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777a",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(Boing,permanent=FALSE,name="6-12")%>%
+                    seize("Boeing 777c",amount=1)%>%
+                    timeout(7.5)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(7.5)%>% 
+                            release("Boeing 777c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-14")%>%
+                            seize("c-130c",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130c",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  
+  #2-9-6-12
+  route39<- trajectory("2-9-6-12") %>%
+    batch(yisan,permanent=FALSE,name="2-9")%>%
+    seize("c-130d", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-130d",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-6")%>%
+            seize("Boeing 777a",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777a",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(Boing,permanent=FALSE,name="6-12")%>%
+                    seize("Boeing 777c",amount=1)%>%
+                    timeout(15)%>%
+                    release("Boeing 777c",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  
+  
+  
+  #2-9-6-12-13
+  
+  route40<- trajectory("2-9-6-12-13") %>%
+    batch(yisan,permanent=FALSE,name="2-9")%>%
+    seize("c-130d", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-130d",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-6")%>%
+            seize("Boeing 777a",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777a",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(Boing,permanent=FALSE,name="6-12")%>%
+                    seize("Boeing 777c",amount=1)%>%
+                    timeout(7.5)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(7.5)%>% 
+                            release("Boeing 777c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-13")%>%
+                            seize("c-130b",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130b",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  #2-9-6-12-14
+  
+  route41<- trajectory("2-9-6-12-14") %>%
+    batch(yisan,permanent=FALSE,name="2-9")%>%
+    seize("c-130d", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5)%>% #round trip c-130 home
+            release("c-130d",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-6")%>%
+            seize("Boeing 777a",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777a",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(Boing,permanent=FALSE,name="6-12")%>%
+                    seize("Boeing 777c",amount=1)%>%
+                    timeout(7.5)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(7.5)%>% 
+                            release("Boeing 777c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-14")%>%
+                            seize("c-130c",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130c",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  
+  #3-9-6-12
+  
+  route42<- trajectory("3-9-6-12") %>%
+    batch(yisan,permanent=FALSE,name="3-9")%>%
+    seize("c-130e", amount=1) %>% #bragg to batimore uses c-130
+    timeout(7)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(7)%>% #round trip c-130 home
+            release("c-130e",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-6")%>%
+            seize("Boeing 777a",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777a",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(Boing,permanent=FALSE,name="6-12")%>%
+                    seize("Boeing 777c",amount=1)%>%
+                    timeout(15)%>%
+                    release("Boeing 777c",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  
+  
+  #3-9-6-12-14
+  
+  
+  route43<- trajectory("3-9-6-12-14") %>%
+    batch(yisan,permanent=FALSE,name="3-9")%>%
+    seize("c-130e", amount=1) %>% #bragg to batimore uses c-130
+    timeout(7)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(7)%>% #round trip c-130 home
+            release("c-130e",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-6")%>%
+            seize("Boeing 777a",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777a",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(Boing,permanent=FALSE,name="6-12")%>%
+                    seize("Boeing 777c",amount=1)%>%
+                    timeout(7.5)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(7.5)%>% 
+                            release("Boeing 777c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-14")%>%
+                            seize("c-130c",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130c",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  #3-9-6-12-13
+  
+  
+  route44<- trajectory("3-9-6-12-13") %>%
+    batch(yisan,permanent=FALSE,name="3-9")%>%
+    seize("c-130e", amount=1) %>% #bragg to batimore uses c-130
+    timeout(7)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(7)%>% #round trip c-130 home
+            release("c-130e",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="9-6")%>%
+            seize("Boeing 777a",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777a",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(Boing,permanent=FALSE,name="6-12")%>%
+                    seize("Boeing 777c",amount=1)%>%
+                    timeout(7.5)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(7.5)%>% 
+                            release("Boeing 777c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-13")%>%
+                            seize("c-130b",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130b",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  #5-10-7-11
+  
+  route45<- trajectory("5-10-7-11") %>%
+    batch(ceewu,permanent=FALSE,name="5-10")%>%
+    seize("c-5g", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5.5)%>% #round trip c-130 home
+            release("c-5g",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-7")%>%
+            seize("Boeing 777d",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777d",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-11")%>%
+                    seize("c-5b",amount=1)%>%
+                    timeout(16)%>%
+                    release("c-5b",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  #5-10-7-12
+  
+  route46<- trajectory("5-10-7-12") %>%
+    batch(ceewu,permanent=FALSE,name="5-10")%>%
+    seize("c-5g", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5.5)%>% #round trip c-130 home
+            release("c-5g",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-7")%>%
+            seize("Boeing 777d",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777d",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(16)%>%
+                    release("c-5c",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  
+  
+  
+  
+  #5-10-8-12
+  
+  route47<- trajectory("5-10-8-12") %>%
+    batch(ceewu,permanent=FALSE,name="5-10")%>%
+    seize("c-5g", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5.5)%>% #round trip c-130 home
+            release("c-5g",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-8")%>%
+            seize("Boeing 777e",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777e",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="8-12")%>%
+                    seize("c-5e",amount=1)%>%
+                    timeout(16)%>%
+                    release("c-5e",amount=1)%>%
+                    separate()
+            )%>%
+            synchronize(wait = FALSE))
+  
+  
+  
+  
+  #5-10-7-12-13
+  route48<- trajectory("5-10-7-12-13") %>%
+    batch(ceewu,permanent=FALSE,name="5-10")%>%
+    seize("c-5g", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5.5)%>% #round trip c-130 home
+            release("c-5g",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-7")%>%
+            seize("Boeing 777d",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777d",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-13")%>%
+                            seize("c-130b",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130b",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  #5-10-8-12-13
+  
+  route49<- trajectory("5-10-8-12-13") %>%
+    batch(ceewu,permanent=FALSE,name="5-10")%>%
+    seize("c-5g", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5.5)%>% #round trip c-130 home
+            release("c-5g",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-8")%>%
+            seize("Boeing 777e",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777e",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="8-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-13")%>%
+                            seize("c-130b",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130b",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  #5-10-8-12-14
+  route50<- trajectory("5-10-8-12-14") %>%
+    batch(ceewu,permanent=FALSE,name="5-10")%>%
+    seize("c-5g", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5.5)%>% #round trip c-130 home
+            release("c-5g",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-8")%>%
+            seize("Boeing 777e",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777e",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="8-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-14")%>%
+                            seize("c-130c",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130c",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  
+  
+  #5-10-7-12-14
+  route51<- trajectory("5-10-7-12-14") %>%
+    batch(ceewu,permanent=FALSE,name="5-10")%>%
+    seize("c-5g", amount=1) %>% #bragg to batimore uses c-130
+    timeout(5.5)%>% #bragg to batimore takes 9 hours back and forth
+    clone(n=2,
+          trajectory("original")%>%
+            timeout(5.5)%>% #round trip c-130 home
+            release("c-5g",amount=1)%>%
+            separate(),
+          trajectory("forward")%>%
+            separate()%>%
+            batch(Boing,permanent=FALSE,name="10-7")%>%
+            seize("Boeing 777d",amount=1)%>%
+            timeout(8.5)%>% #round trip c-130 home
+            clone(n=2,
+                  trajectory("original")%>%
+                    timeout(8.5)%>%
+                    release("Boeing 777d",amount=1)%>%
+                    separate(),
+                  trajectory("forward")%>%
+                    separate()%>%
+                    batch(ceewu,permanent=FALSE,name="7-12")%>%
+                    seize("c-5c",amount=1)%>%
+                    timeout(8)%>%
+                    clone(n=2,
+                          trajectory("original")%>%
+                            timeout(8)%>% 
+                            release("c-5c",amount=1)%>%
+                            separate(),
+                          trajectory("forward")%>%
+                            separate()%>%
+                            batch(yisan,permanent=FALSE,name="12-14")%>%
+                            seize("c-130c",amount=1)%>%
+                            timeout(11)%>%
+                            release("c-130c",amount=1)
+                    )%>%
+                    synchronize(wait = FALSE)))
+  
+  
+  
+  
+  
+  r2to11<-trajectory("arriving platoons1")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.1,0.9)),c(T,T),
+           route6,route7)
+  
+  r2to13<-trajectory("arriving platoons2")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.1,0.9)),c(T,T),
+           route9,route40)
+  
+  
+  r2to14<-trajectory("arriving platoons3")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.1,0.9)),c(T,T),
+           route10,route41)
+  
+  r2to12<-trajectory("arriving platoons4")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.1,0.9)),c(T,T),
+           route8,route39)
+  
+  
+  r3to11<-trajectory("arriving platoons5")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.1,0.9)),c(T,T),
+           route11,route12)
+  
+  r3to13<-trajectory("arriving platoons6")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route14,route44)
+  
+  r3to14<-trajectory("arriving platoons7")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route15,route43)
+  
+  
+  r3to12<-trajectory("arriving platoons8")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route13,route42)
+  
+  
+  r1to11<-trajectory("arriving platoons9")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route1,route2)
+  
+  r1to13<-trajectory("arriving platoons10")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route4,route37)
+  
+  
+  r1to14<-trajectory("arriving platoons11")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route5,route38)
+  
+  r1to12<-trajectory("arriving platoons12")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route3,route36)
+  
+  r5to11<-route45
+  
+  r5to13<-trajectory("arriving platoons14")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route48,route49)
+  
+  r5to14<-trajectory("arriving platoons15")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route50,route51)
+  
+  r5to12<-trajectory("arriving platoons16")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route46,route47)
+  
+  r4to11<-trajectory("arriving platoons17")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route28,route35)
+  
+  r4to13<-trajectory("arriving platoons18")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route31,route33)
+  
+  r4to14<-trajectory("arriving platoons19")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route32,route34)
+  
+  r4to12<-trajectory("arriving platoons20")%>%
+    branch(function() sample(c(1,2),1,prob=c(0.5,0.5)),c(T,T),
+           route29,route30)
+  
+  r6to11<-route16
+  r6to13<-route18
+  r6to14<-route19
+  r6to12<-route17
+  r7to11<-route20
+  r7to13<-route22
+  r7to14<-route23
+  r7to12<-route21
+  r8to11<-route24
+  r8to13<-route26
+  r8to14<-route27
+  r8to12<-route25
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+airplane<-function(G){
+  set.seed(8)
+  envs<- lapply(1:3, function(i){
+    simmer("H") %>%
+                add_resource("c-5a",G[1])%>%
+                add_resource("c-5b",G[2])%>%
+                add_resource("c-5c",G[3])%>%
+                add_resource("c-5d",G[4])%>%
+                add_resource("c-5e",G[5])%>%
+                add_resource("c-5f",G[6])%>%
+                add_resource("c-5g",G[7])%>%
+                add_resource("c-130a",G[8])%>%
+                add_resource("c-130b",G[9])%>%
+                add_resource("c-130c",G[10])%>%
+                add_resource("c-130d",G[11])%>%
+                add_resource("c-130e",G[12])%>%
+                add_resource("Boeing 777a",G[13])%>%
+                add_resource("Boeing 777b",G[14])%>%
+                add_resource("Boeing 777c",G[15])%>%
+                add_resource("Boeing 777d",G[16])%>%
+                add_resource("Boeing 777e",G[17])%>%
+      add_generator("platoon1_", r2to11, 
+                    function() rexp(n=1,rate=0.00417*2)) %>%
+      add_generator("platoon2_", r2to12, 
+                    function() rexp(n=1,rate=0.00417*1)) %>% 
+      add_generator("platoon3_", r2to13, 
+                    function() rexp(n=1,rate=0.00417*6)) %>%
+      
+      add_generator("platoon4_", r2to14, 
+                    function() rexp(n=1,rate=0.00417*5)) %>%  
+      
+      add_generator("platoon5_", r3to11, 
+                    function() rexp(n=1,rate=0.00417*3)) %>%
+      add_generator("platoon6_", r3to12, 
+                    function() rexp(n=1,rate=0.00417*2)) %>%
+      add_generator("platoon7_", r3to13, 
+                    function() rexp(n=1,rate=0.00417*4)) %>%
+      add_generator("platoon8_", r3to14, 
+                    function() rexp(n=1,rate=0.00417*5)) %>%
+      add_generator("platoon9_", r1to11, 
+                    function() rexp(n=1,rate=0.00417*5)) %>%
+      add_generator("platoon10_", r1to12, 
+                    function() rexp(n=1,rate=0.00417*1)) %>%
+      add_generator("platoon11_", r1to13, 
+                    function() rexp(n=1,rate=(0.00417*9))) %>%
+      add_generator("platoon12_", r1to14, 
+                    function() rexp(n=1,rate=0.00417*8)) %>%
+      add_generator("platoon13_", r5to11, 
+                    function() rexp(n=1,rate=0.00417*6)) %>%
+      add_generator("platoon14_", r5to12, 
+                    function() rexp(n=1,rate=0.00417*2)) %>%
+      add_generator("platoon15_", r5to13, 
+                    function() rexp(n=1,rate=0.00417*7)) %>%
+      add_generator("platoon16_", r5to14, 
+                    function() rexp(n=1,rate=0.00417*8)) %>%
+      add_generator("platoon17_", r4to11, 
+                    function() rexp(n=1,rate=0.00417*4)) %>%
+      add_generator("platoon18_", r4to12, 
+                    function() rexp(n=1,rate=0.00417*2)) %>%
+      add_generator("platoon19_", r4to13, 
+                    function() rexp(n=1,rate=0.00417*4)) %>%
+      add_generator("platoon20_", r4to14, 
+                    function() rexp(n=1,rate=0.00417*7)) %>%
+      add_generator("platoon21_", r6to11, 
+                    function() rexp(n=1,rate=0.00417*1)) %>%
+      add_generator("platoon22_", r6to12, 
+                    function() rexp(n=1,rate=0.00417*2)) %>%
+      add_generator("platoon23_", r6to13, 
+                    function() rexp(n=1,rate=0.00417*1)) %>%
+      #add_generator("platoon24", r6to14, 
+      #function() rexp(n=1,rate=0.0041*0)) %>%
+      add_generator("platoon25_", r7to11, 
+                    function() rexp(n=1,rate=0.00417*1)) %>%
+      add_generator("platoon26_", r7to12, 
+                    function() rexp(n=1,rate=0.00417*2)) %>%
+      #add_generator("platoon27", r7to13, 
+      #function() rexp(n=1,rate=0.0041*0))
+      #add_generator("platoon28", r7to14, 
+      #function() rexp(n=1,rate=0.0041*0)) %>%
+      #add_generator("platoon29", r8to11, 
+      #function() rexp(n=1,rate=0.0041*0)) %>%
+      add_generator("platoon30_", r8to12, 
+                    function() rexp(n=1,rate=0.00417*1)) %>%
+      add_generator("platoon31_", r8to13, 
+                    function() rexp(n=1,rate=0.00417*1)) %>%
+      #add_generator("platoon32", r8to14, function() rexp(n=1,rate=0.0041*0)) 
+      run(until=3000)})
+  
+  platonmonotr1 <- lapply(1:3, function(i){
+    result <- envs[[i]] %>% 
+      get_mon_arrivals() %>%
+      mutate(flow_time = end_time - start_time)
+  })
+  
+  mean_list<-c()
+  for (i in 1: length(platonmonotr1)){
+    t_data<-data.frame(platonmonotr1[i])
+    t_data<-t_data[-c(1:154),]
+    st_data<-aggregate(t_data$start_time~t_data$name,FUN="min")
+    s2_data<-aggregate(t_data$end_time~t_data$name,FUN="max")
+    mean_list[i]<-mean(s2_data$`t_data$end_time`-st_data$`t_data$start_time`)
+    
+  }
+  total_time<-mean(mean_list)-8
+  
+  
+  total_time
+  
+}
+  
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+#OPTIMIZING
+
+
+```{R}
+
+
+H=c(rep(1,17))
+results<-matrix(data=0,nrow=175,ncol = 18);
+for(l in 1:7){
+  H[l]=2;
+  for(m in 13:17){
+    H[m]=H[m]+1;
+    for(n in 13:17){
+      H[n]=H[n]+1;
+      a=airplane(H);  
+      results[25*(l-1)+5*(m-13)+(n-12),18]=a;
+      results[25*(l-1)+5*(m-13)+n-12,1:17]=H;
+      H[n]=H[n]-1;
+    }
+    H[m]=H[m]-1;
+  
+  H[l]=1;
+}
+
+
+
+
+```
+
